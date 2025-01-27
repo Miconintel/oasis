@@ -16,7 +16,7 @@ const FilterButton = styled.button`
   border: none;
 
   ${(props) =>
-    props.active &&
+    props.active === "true" &&
     css`
       background-color: var(--color-brand-600);
       color: var(--color-brand-50);
@@ -41,7 +41,8 @@ function Filter({ filterField, options }) {
 
   function handleClick(value) {
     searchParams.set(filterField, value);
-    // if there is a page query, always set to one, whenever you
+    // if there is a page query, always set to page one, when you re loading from another page
+    // that uses paginaton too whenever you
     // load this page.
     if (searchParams.get("page")) searchParams.set("page", 1);
     setSearchParams(searchParams);
@@ -53,7 +54,7 @@ function Filter({ filterField, options }) {
         <FilterButton
           key={option.value}
           onClick={() => handleClick(option.value)}
-          active={option.value === currentFilter}
+          active={(option.value === currentFilter).toString()}
           disabled={option.value === currentFilter}
         >
           {option.label}
