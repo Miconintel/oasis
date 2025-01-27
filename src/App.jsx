@@ -1,4 +1,4 @@
-import GlobalStyles from "./styles/GlobalStyes";
+import GlobalStyles from "./styles/GlobalStyles";
 // import styled from "styled-components";
 // import Heading from "./ui/Heading";
 import { BrowserRouter } from "react-router-dom";
@@ -17,7 +17,8 @@ import AppLayout from "./ui/AppLayout";
 import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
 import Checkin from "./pages/Checkin";
-import { DarkModeProvider } from "./context/darkModeContext";
+import { DarkModeProvider } from "./context/DarkModeContext";
+
 //
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
