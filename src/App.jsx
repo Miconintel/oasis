@@ -1,6 +1,4 @@
 import GlobalStyles from "./styles/GlobalStyles";
-// import styled from "styled-components";
-// import Heading from "./ui/Heading";
 import { BrowserRouter } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
@@ -9,7 +7,7 @@ import Bookings from "./pages/Bookings";
 import Cabins from "./pages/Cabins";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
-// import Account from "./pages/Account";
+import Account from "./pages/Account";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import { Navigate } from "react-router-dom";
@@ -18,14 +16,9 @@ import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
 import Checkin from "./pages/Checkin";
 import { DarkModeProvider } from "./context/DarkModeContext";
-
+import ProtectedRoute from "./ui/ProtectedRoute";
 //
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-
-// const Wrapper = styled.main`
-//   background-color: red;
-//   padding: 20px;
-// `;
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,7 +37,13 @@ function App() {
           <GlobalStyles />
           <BrowserRouter>
             <Routes>
-              <Route element={<AppLayout />}>
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
                 <Route index element={<Navigate replace to="dashboard" />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="bookings" element={<Bookings />} />
@@ -53,7 +52,7 @@ function App() {
                 <Route path="cabins" element={<Cabins />} />
                 <Route path="users" element={<Users />} />
                 <Route path="settings" element={<Settings />} />
-                {/* <Route path="account" element={<Account />} /> */}
+                <Route path="account" element={<Account />} />
               </Route>
               <Route path="login" element={<Login />} />
               <Route path="*" element={<PageNotFound />} />
